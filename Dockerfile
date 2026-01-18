@@ -1,14 +1,16 @@
-# Image Java 17 (
-FROM eclipse-temurin:17-jdk
-
-# Dossier de travail dans le conteneur
+# =========================
+# Stage 1 : Build avec Gradle
+# =========================
+FROM gradle:8.6-jdk17 AS build
 WORKDIR /app
+COPY . .
+RUN gradle clean build -x test
 
-# Copier le jar généré par Gradle
-COPY build/libs/*.jar app.jar
-
-# Port exposé par Spring Boot
+# =========================
+# Stage 2 : Run
+# =========================
+FROM eclipse-temurin:17-jdk
+WORKDIR /app
+COPY --from=build /app/build/libs/*.jar app.jar
 EXPOSE 8081
-
-# Commande de démarrage
 ENTRYPOINT ["java", "-jar", "app.jar"]
