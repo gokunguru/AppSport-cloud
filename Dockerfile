@@ -1,7 +1,7 @@
 # =========================
-# Stage 1 : Build avec Gradle
+# Stage 1 : Build avec Gradle (version compatible Spring Boot 4)
 # =========================
-FROM gradle:8.6-jdk17 AS build
+FROM gradle:8.14.0-jdk17 AS build
 WORKDIR /app
 COPY . .
 RUN gradle clean build -x test
