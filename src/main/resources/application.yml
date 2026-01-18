@@ -22,7 +22,7 @@ spring:
 
   datasource:
     url: jdbc:h2:mem:appsportdb
-    driver-class-name: org.h2.Driver
+    driver-class-name: org.postgresql.Driver
     username: sa
     password:
     generate-unique-name: false
